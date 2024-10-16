@@ -27,10 +27,9 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}  # 추가된 환경 변수
         run: |
-          npm run export  # 정적 사이트로 빌드할 경우
-          # GCP에 배포하는 명령어 추가
+          # App Engine에 배포할 때는 npm run export 명령어를 사용할 필요 없음
           gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
           gcloud config set project as-rudgus4620
-          # 배포 명령어 예시
-          gcloud app deploy
+          gcloud app deploy --quiet  # --quiet 플래그는 배포 중의 모든 프롬프트를 비활성화합니다.
