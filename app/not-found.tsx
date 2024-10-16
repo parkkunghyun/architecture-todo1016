@@ -9,7 +9,7 @@ export default function NotFound() {
                 <Link href="/">
                     홈페이지로 돌아가기
                 </Link>
-                </button>
+            </button>
         </div>
     )
 }
